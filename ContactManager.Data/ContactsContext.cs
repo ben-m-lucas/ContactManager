@@ -8,6 +8,14 @@ namespace ContactManager.Data
 {
     public class ContactsContext : DbContext
     {
-        public DbSet<Contact> Contacts { get; set; }
+        public ContactsContext()
+        {
+        }
+
+        public ContactsContext(DbContextOptions<ContactsContext> options) : base(options)
+        {
+        }
+
+        public virtual DbSet<Contact> Contacts { get; set; }
     }
 }
