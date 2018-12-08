@@ -6,6 +6,7 @@ namespace ContactManager.Data.Models
 {
     public class Contact
     {
+        public long Id { get; set; }
         public string GivenName { get; set; }
         public string Surname { get; set; }
         public Address PrimaryAddress { get; set; }
