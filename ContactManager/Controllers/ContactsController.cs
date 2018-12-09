@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContactManager.Data;
+using ContactManager.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,20 @@ namespace ContactManager.Controllers
         {
             var contacts = await _context.Contacts.ToListAsync();
             return Ok(contacts);
+        }
+
+        public async Task<IActionResult> CreateContact(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                await _context.Contacts.AddAsync(contact);
+                await _context.SaveChangesAsync();
+                return Ok(contact.Id);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         public void Dispose()
